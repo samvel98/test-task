@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://reqres.in",
+    baseUrl: "http://localhost:3002",
   }),
 
   endpoints: (builder) => ({
@@ -16,6 +16,9 @@ export const apiSlice = createApi({
           password
         }
       }) 
+    }),
+    listGiftboxes: builder.query({
+      query: () => `/api/giftbox`,
     }),
     usersList: builder.query({
       query: ({ page, perPage }) => `/api/users?page=${page}&per_page=${perPage}`,
@@ -42,15 +45,23 @@ export const apiSlice = createApi({
         url: `/api/users/${id}`,
         method: 'DELETE'
       })
+    }),
+    deleteGiftbox: builder.mutation({
+      query: ({ id }) => ({
+        url: `/api/giftbox/delete/${id}`,
+        method: 'DELETE'
+      })
     })
   }),
 });
 
 export const {
   useLazyUsersListQuery,
+  useListGiftboxesQuery,
   useUpdateUserMutation,
   useCreateUserMutation,
   useDeleteUserMutation,
+  useDeleteGiftboxMutation,
   useUsersListQuery,
   useGetUserQuery,
   useLoginMutation

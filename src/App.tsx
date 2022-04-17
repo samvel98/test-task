@@ -1,31 +1,41 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import { Login, UsersPage } from './components';
+import { Login, UsersPage, Home, Giftboxes } from './components';
 import { useSelector } from 'react-redux';
 import { currentUserToken } from './features/current-user/current-user.slice'
 
 function App() {
   const token = useSelector(currentUserToken);
+  return <NavigationRoutes />;
   return token ? <NavigationRoutes /> : <NavigateLoginPage />
 }
 
 function NavigationRoutes() {
   return (
-    <div>
-      <h1>Application</h1>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<UsersPage />} path="/users" />
-            
-          <Route element={<div>profile</div>} path="/preferences" />            
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route index element={<Home />} />
+
+          <Route path="users">
+            <Route index element={<UsersPage />} />
+            {/* <Route path=":userId" element={<Single />} /> */}
+            {/* <Route
+              path="new"
+              element={<New inputs={userInputs} title="Add New User" />}
+            /> */}
+          </Route>
+          <Route path='giftboxes' element={<Giftboxes />} />
+          {/* <Route element={<UsersPage />} path="/users" /> */}
+
           <Route
-            element={<Navigate to="/users" />}
+            element={<Navigate to="/" />}
             path="*"
           />
-        </Routes>
-      </BrowserRouter>
-    </div>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
