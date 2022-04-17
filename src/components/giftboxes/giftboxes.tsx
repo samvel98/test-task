@@ -63,7 +63,9 @@ export const Giftboxes = () => {
   const [deleteGiftbox] = useDeleteGiftboxMutation();
  
   useEffect(() => {
-    setGiftboxes(data?.giftboxes)
+    if(data?.giftboxes) {
+      setGiftboxes(data?.giftboxes)
+    }
   }, [data?.giftboxes]);
 
   const onAddGiftbox = useCallback(() => {
@@ -77,6 +79,7 @@ export const Giftboxes = () => {
   const onSubmit = useCallback((values) => {
     console.log(values)
   }, [])
+  console.log(giftboxes)
 
   return (
     <div className={styles.giftboxes}>
