@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '../../features/api/api.slice'
-import { setLoggedInUserToken } from '../../features/current-user/current-user.slice';
+// import { setLoggedInUserToken } from '../../features/current-user/current-user.slice';
 import { useStyles } from './login.styles';
 
 type Inputs = {
@@ -21,7 +21,7 @@ export const Login = () => {
       if (res.error) {
         return console.error(res.error)
       }
-      return dispatch(setLoggedInUserToken(res.data.token))
+      // return dispatch(setLoggedInUserToken(res.data.token))
     });
   };
 

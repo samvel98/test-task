@@ -3,12 +3,12 @@ import './App.css';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { Login, UsersPage, Home, Giftboxes } from './components';
 import { useSelector } from 'react-redux';
-import { currentUserToken } from './features/current-user/current-user.slice'
+// import { currentUserToken } from './features/current-user/current-user.slice'
 
 function App() {
-  const token = useSelector(currentUserToken);
+  // const token = useSelector(currentUserToken);
   return <NavigationRoutes />;
-  return token ? <NavigationRoutes /> : <NavigateLoginPage />
+  // return token ? <NavigationRoutes /> : <NavigateLoginPage />
 }
 
 function NavigationRoutes() {
