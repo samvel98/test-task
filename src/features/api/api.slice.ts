@@ -21,7 +21,7 @@ export const apiSlice = createApi({
       query: () => `/api/giftbox`,
     }),
     usersList: builder.query({
-      query: ({ page, perPage }) => `/api/users?page=${page}&per_page=${perPage}`,
+      query: () => `/api/users`,
     }),
     getUser: builder.query({
       query: ({ id }) => `/api/users/${id}`,

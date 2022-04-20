@@ -19,11 +19,11 @@ export function EditModal({ user, onClose, onSubmit }: EditUserModalProps) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
+      {/* <div className={styles.content}>
         <h1 className={styles.title}>Edt User</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.input}>
-            <input className={styles.inputField} placeholder=" " {...register("name", { required: true })} defaultValue={user.first_name} />
+            <input className={styles.inputField} placeholder=" " {...register("name", { required: true })} defaultValue={user.name} />
             <label className={styles.label}>Name</label>
             {errors.job && <span className={styles.error}>This field is required</span>}
           </div>
@@ -35,7 +35,7 @@ export function EditModal({ user, onClose, onSubmit }: EditUserModalProps) {
           <input className={styles.submitBtn} type="submit" />
           <input className={styles.cancelBtn} type="button" value="cancel" onClick={onClose} />
         </form>
-      </div>
+      </div> */}
     </div>
   )
 }

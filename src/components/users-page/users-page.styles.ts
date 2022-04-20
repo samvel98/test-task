@@ -1,6 +1,33 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(() => ({
+  users: {
+    display: 'flex',
+  },
+  usersContainer: {
+    flex: 6
+  },
+  cellAction: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 15
+  },
+  deleteButton: {
+    padding: '2px 5px',
+    borderRadius: 5,
+    color: 'crimson',
+    border: '1px dotted rgba(220, 20, 60, 0.6)',
+    cursor: 'pointer'
+  },
+  cellImage: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    height: '100%',
+  },
+  cellFullName: {
+
+  },
   loadingContainer: {
     width: 50,
     height: 50,

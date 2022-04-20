@@ -1,10 +1,13 @@
 interface IUser {
+  name?: string;
   id: string;
-  avatar: string;
+  surname?: string;
   email: string;
-  fullName?: string;
-  first_name?: string;
-  last_name?: string;
+  phone?: string;
+  dob?: string;
+  gender?: string;
+  image?: string;
+  confirmed?: boolean;
 }
 interface IUserChild {
   joob: string;

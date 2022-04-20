@@ -79,7 +79,6 @@ export const Giftboxes = () => {
   const onSubmit = useCallback((values) => {
     console.log(values)
   }, [])
-  console.log(giftboxes)
 
   return (
     <div className={styles.giftboxes}>
