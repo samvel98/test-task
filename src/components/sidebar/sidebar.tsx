@@ -49,22 +49,30 @@ export const Sidebar = () => {
               <span>Orders</span>
             </li>
           </Link>
-          <li>
-            <GroupsTwoTone className={styles.icon} />
-            <span>Team Members</span>
-          </li>
-          <li>
-            <LiveHelpTwoTone className={styles.icon} />
-            <span>FAQ</span>
-          </li>
-          <li>
-            <SubscriptionsTwoTone className={styles.icon} />
-            <span>Subscriptions</span>
-          </li>
-          <li>
-            <SettingsApplicationsTwoTone className={styles.icon} />
-            <span>Settings</span>
-          </li>
+          <Link to="/team-members" style={{ textDecoration: "none" }}>
+            <li>
+              <GroupsTwoTone className={styles.icon} />
+              <span>Team Members</span>
+            </li>
+          </Link>
+          <Link to="/FAQ" style={{ textDecoration: "none" }}>
+            <li>
+              <LiveHelpTwoTone className={styles.icon} />
+              <span>FAQ</span>
+            </li>
+          </Link>
+          <Link to="/subscriptions" style={{ textDecoration: "none" }}>
+            <li>
+              <SubscriptionsTwoTone className={styles.icon} />
+              <span>Subscriptions</span>
+            </li>
+          </Link>
+          <Link to="/settings" style={{ textDecoration: "none" }}>
+            <li>
+              <SettingsApplicationsTwoTone className={styles.icon} />
+              <span>Settings</span>
+            </li>
+          </Link>
         </ul>
       </div>
     </div>

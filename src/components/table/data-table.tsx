@@ -1,37 +1,36 @@
 import React from "react";
 
-import { DataGrid, GridColDef, GridColumns, GridRowsProp, GridValueGetterParams } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { useStyles } from "./data-table.styles";
 
 type TableProps = {
   rows: GridRowsProp;
-  // routeTo: string;
+  routeTo?: string;
   columns: GridColDef[];
-  canAdd?: boolean;
   onAddNew?: () => void;
 }
 
-export const DataTable = ({ rows, columns, canAdd, onAddNew }: TableProps) => {
+export const DataTable = ({ rows, columns, routeTo }: TableProps) => {
   const styles = useStyles();
 
   return (
     <div className={styles.datatable}>
-      {canAdd && 
+      {routeTo && 
         <div className={styles.datatableTitle}>
           Add new
-          <div className={styles.link} onClick={onAddNew}>
+          <Link className={styles.link} to={routeTo} >
             Add New
-          </div>
+          </Link>
         </div>
       }
       <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={20}
-        rowsPerPageOptions={[5]}
         checkboxSelection
         disableSelectionOnClick
+        columns={columns}
+        pageSize={20}
+        rows={rows}
+        rowsPerPageOptions={[5]}
       />
     </div>
     )

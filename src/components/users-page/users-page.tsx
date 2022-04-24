@@ -1,14 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
   useUsersListQuery,
-  useUpdateUserMutation,
   useDeleteUserMutation,
-  useCreateUserMutation
 } from '../../features/api/api.slice';
-import { Modal, Loading } from '../'
+import {  Loading, PageControl } from '../'
 import { useStyles } from './users-page.styles';
-import cn from 'classnames';
-import { Sidebar } from '../sidebar';
 import { DataTable } from '../table';
 import { GridColDef } from '@mui/x-data-grid';
 
@@ -75,7 +71,7 @@ export const UsersPage = () => {
  
   const handleDelete = useCallback((id: string) => {
     deleteUser({ id }).then(() => setUsers(prev => prev.filter(item => item.id !== id)));
-  }, [])
+  }, [deleteUser])
 
   useEffect(() => {
     if(data?.users) {
@@ -84,11 +80,10 @@ export const UsersPage = () => {
   }, [data?.users]);
 
   return (
-    <div className={styles.users}>
-      <Sidebar />
-      <div className={styles.usersContainer}>
-        {isFetching ? <Loading /> : <DataTable rows={users} columns={columns} />}
-      </div>
-    </div>
+    <PageControl>
+      <>
+        {isFetching ? <Loading /> : <DataTable columns={columns} rows={users} />}
+      </>
+    </PageControl>
   )
 } 

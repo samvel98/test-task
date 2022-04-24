@@ -7,17 +7,6 @@ export const useStyles = createUseStyles(() => ({
   giftboxesContainer: {
     flex: 6
   },
-  container: {
-    padding: 40,
-    display: 'flex',
-    justifyContent: 'center',
-    '& form': {
-      width: '100%',
-    }
-  },
-  m_b: {
-    marginBottom: '20px !important'
-  },
   cellImage: {
     width: '100%',
     display: 'flex',

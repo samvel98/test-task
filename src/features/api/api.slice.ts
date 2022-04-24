@@ -20,6 +20,13 @@ export const apiSlice = createApi({
     listGiftboxes: builder.query({
       query: () => `/api/giftbox`,
     }),
+    createGiftbox: builder.query({
+      query: ({ data }) => ({
+        url: '/api/giftbox/create',
+        method: 'POST',
+        body: data
+      }) 
+    }),
     usersList: builder.query({
       query: () => `/api/users`,
     }),
@@ -37,8 +44,15 @@ export const apiSlice = createApi({
       query: ({ id, data }) => ({
         url: `/api/users/${id}`,
         method: 'PATCH',
-        body: data
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        body: data,
+        
       }) 
+    }),
+    ordersList: builder.query({
+      query: () => `/admin/order`,
     }),
     deleteUser: builder.mutation({
       query: ({ id }) => ({
@@ -62,6 +76,9 @@ export const {
   useCreateUserMutation,
   useDeleteUserMutation,
   useDeleteGiftboxMutation,
+  useOrdersListQuery,
+  useCreateGiftboxQuery,
+  useLazyCreateGiftboxQuery,
   useUsersListQuery,
   useGetUserQuery,
   useLoginMutation
