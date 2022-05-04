@@ -11,3 +11,4 @@ export * from './team-members';
 export * from './settings';
 export * from './FAQ';
 export * from './subscrib';
+export * from './giftbooks';

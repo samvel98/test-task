@@ -41,9 +41,16 @@ export const Orders = () => {
       renderCell: (params) => {
         return (
           <div>
-            {params.row.address.zipcode}
-            {params.row.address.streetHouseNumber}
-            {params.row.address.city}
+            <span>
+              {params.row.address.zipcode}
+            </span>
+            <span>
+              {params.row.address.streetHouseNumber}
+            </span>
+            <span>
+              {params.row.address.city}
+            </span>
+            
             {params.row.address.country}
           </div>
         )

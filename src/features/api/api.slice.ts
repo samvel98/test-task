@@ -40,6 +40,16 @@ export const apiSlice = createApi({
         body: data
       }) 
     }),
+    getSettings: builder.query({
+      query: () => '/admin/settings',
+    }),
+    updateOrCreateSettings: builder.mutation({
+      query: ({ data }) => ({
+        url: '/admin/settings/update',
+        method: 'POST',
+        body: data
+      }) 
+    }),
     updateUser: builder.mutation({
       query: ({ id, data }) => ({
         url: `/api/users/${id}`,
@@ -52,7 +62,7 @@ export const apiSlice = createApi({
       }) 
     }),
     ordersList: builder.query({
-      query: () => `/admin/order`,
+      query: () => `/admin/orders`,
     }),
     deleteUser: builder.mutation({
       query: ({ id }) => ({
@@ -65,7 +75,60 @@ export const apiSlice = createApi({
         url: `/api/giftbox/delete/${id}`,
         method: 'DELETE'
       })
-    })
+    }),
+    listFAQ: builder.query({
+      query: () => `/admin/faq`,
+    }),
+    getFAQ: builder.query({
+      query: ({ id }) => `/admin/faq/${id}`,
+    }),
+    createFAQ: builder.query({
+      query: ({ data }) => ({
+        url: `/admin/faq/create`,
+        method: 'POST',
+        body: data
+      })
+    }),
+    editFAQ: builder.query({
+      query: ({ data, id }) => ({
+        url: `/admin/faq/update/${id}`,
+        method: 'POST',
+        body: data
+      })
+    }),
+    deleteFAQ: builder.mutation({
+      query: ({ id }) => ({
+        url: `/admin/faq/delete/${id}`,
+        method: 'DELETE'
+      })
+    }),
+    listTeamMember: builder.query({
+      query: () => `/admin/teammembers`,
+    }),
+    getTeamMember: builder.query({
+      query: ({ id }) => `/admin/teammembers/${id}`,
+    }),
+    deleteTeamMember: builder.mutation({
+      query: ({ id }) => ({
+        url: `/admin/teammembers/delete/${id}`,
+        method: 'DELETE'
+      })
+    }),
+    createTeamMember: builder.query({
+      query: ({ data }) => ({
+        url: `/admin/teammembers/create`,
+        method: 'POST',
+        body: data
+      })
+    }),
+    editTeamMember: builder.query({
+      query: ({ data, id }) => ({
+        url: `/admin/teammembers/update/${id}`,
+        method: 'POST',
+        body: data
+      })
+    }),
+    
   }),
 });
 
@@ -80,6 +143,18 @@ export const {
   useCreateGiftboxQuery,
   useLazyCreateGiftboxQuery,
   useUsersListQuery,
+  useLazyCreateFAQQuery,
+  useGetFAQQuery,
+  useLazyEditFAQQuery,
+  useListFAQQuery,
+  useDeleteFAQMutation,
+  useUpdateOrCreateSettingsMutation,
+  useGetSettingsQuery,
+  useLazyCreateTeamMemberQuery,
+  useLazyEditTeamMemberQuery,
+  useDeleteTeamMemberMutation,
+  useListTeamMemberQuery,
+  useGetTeamMemberQuery,
   useGetUserQuery,
   useLoginMutation
 } = apiSlice;

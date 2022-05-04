@@ -2,79 +2,71 @@ import React, { useCallback, useEffect, useState } from "react";
 // import { useStyles } from "./giftboxes.styles";
 import {  DataTable, PageControl } from "../";
 import { GridColDef } from "@mui/x-data-grid";
-import { useDeleteGiftboxMutation, useListGiftboxesQuery } from "../../features/api/api.slice";
+import { useDeleteTeamMemberMutation, useListTeamMemberQuery } from "../../features/api/api.slice";
 import { Loading } from "../loading";
+import { useStyles } from "../giftboxes/giftboxes.styles";
+import { Link } from "react-router-dom";
 
 export const TeamMembers = () => {
-  // const styles = useStyles();
-  const [giftboxes, setGiftboxes] = useState<IGiftbox[]>([]);
+  const styles = useStyles();
+  const [teamMembers, setTeamMembers] = useState<any[]>([]);
 
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 90 },
-    // {
-    //   field: 'img',
-    //   headerName: 'Image',
-      
-    //   renderCell: (params) => {
-    //     return (
-    //       <div className={styles.cellImage}><img src={`${process.env.REACT_APP_API_URL}/${params.row.img}`} /></div>
-    //     )
-    //   }
-    // },
     {
-      field: 'title',
-      headerName: 'Title',
+      field: 'avatar',
+      headerName: 'Avatar',
     },
     {
-      field: 'size',
-      headerName: 'Size',
+      field: 'name',
+      headerName: 'Name',
     },
     {
-      field: 'price',
-      headerName: 'Price',
+      field: 'insta',
+      headerName: 'Instagramm',
     },
     {
-      field: 'gend',
-      headerName: 'Gender',
-    },
-    // {
-    //   field: "action",
-    //   headerName: "Actions",
-    //   width: 200,
-    //   renderCell: (params) => {
-    //     return (
-    //       <div className={styles.cellAction}>
-    //         <div className={styles.editButton}>Edit</div>
-    //         <div
-    //           className={styles.deleteButton}
-    //           onClick={() => handleDelete(params.row.id)}
-    //         >
-    //           Delete
-    //         </div>
-    //       </div>
-    //     );
-    //   },
-    // }
+      field: "action",
+      headerName: "Actions",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <div className={styles.cellAction}>
+            <div className={styles.editButton}>
+              <Link to={`/team-members/edit/${params.row.id}`}>
+                Edit
+              </Link>
+              </div>
+            <div
+              className={styles.deleteButton}
+              onClick={() => handleDelete(params.row.id)}
+            >
+              Delete
+            </div>
+          </div>
+        );
+      },
+    }
   ];
 
-  const { isFetching, data } = useListGiftboxesQuery({});
-  const [deleteGiftbox] = useDeleteGiftboxMutation();
+  const { isFetching, data } = useListTeamMemberQuery({});
+  const [deleteTeamMember] = useDeleteTeamMemberMutation();
  
   useEffect(() => {
-    if(data?.giftboxes) {
-      setGiftboxes(data?.giftboxes)
+    if(data?.teamMembers) {
+      setTeamMembers(data?.teamMembers)
     }
-  }, [data?.giftboxes]);
+  }, [data?.teamMembers]);
 
 
   const handleDelete = useCallback((id: string) => {
-    deleteGiftbox({ id }).then(() => setGiftboxes(prev => prev.filter(item => item.id !== id)));
-  }, [deleteGiftbox])
+    deleteTeamMember({ id }).then(() => setTeamMembers(prev => prev.filter(item => item.id !== id)));
+  }, [deleteTeamMember])
 
   return (
     <PageControl>
       <>
-        {isFetching ? <Loading /> : <DataTable  columns={columns} routeTo="/giftboxes/new" rows={[]} />}
+        {isFetching ? <Loading /> : <DataTable  columns={columns} routeTo="/team-members/new" rows={teamMembers} />}
       </>
     </PageControl>
   );

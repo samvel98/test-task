@@ -1,0 +1,23 @@
+header, footer, aside, nav, form, iframe, .menu, .hero, .adslot {
+  display: none;
+}
+
+.outer {
+  display: table;
+  height: 10cm;
+  margin: 0 auto;
+  width: 10cm;
+  page-break-after: always;
+}
+
+img {
+  max-width: 8cm;
+}
+
+.inner {
+  background: #f2f2f2;
+  padding: 40px;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}

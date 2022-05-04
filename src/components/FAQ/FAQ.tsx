@@ -2,79 +2,71 @@ import React, { useCallback, useEffect, useState } from "react";
 // import { useStyles } from "./giftboxes.styles";
 import {  DataTable, PageControl } from "../";
 import { GridColDef } from "@mui/x-data-grid";
-import { useDeleteGiftboxMutation, useListGiftboxesQuery } from "../../features/api/api.slice";
+import { useDeleteFAQMutation, useListFAQQuery } from "../../features/api/api.slice";
 import { Loading } from "../loading";
+import { useStyles } from "../giftboxes/giftboxes.styles";
+import { Link } from "react-router-dom";
 
 export const FAQ = () => {
-  // const styles = useStyles();
-  const [giftboxes, setGiftboxes] = useState<IGiftbox[]>([]);
+  const styles = useStyles();
+  const [FAQs, setFAQs] = useState<any[]>([]);
 
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 90 },
-    // {
-    //   field: 'img',
-    //   headerName: 'Image',
-      
-    //   renderCell: (params) => {
-    //     return (
-    //       <div className={styles.cellImage}><img src={`${process.env.REACT_APP_API_URL}/${params.row.img}`} /></div>
-    //     )
-    //   }
-    // },
     {
-      field: 'title',
-      headerName: 'Title',
+      field: 'type',
+      headerName: 'Type',
     },
     {
-      field: 'size',
-      headerName: 'Size',
+      field: 'question',
+      headerName: 'Question',
     },
     {
-      field: 'price',
-      headerName: 'Price',
+      field: 'answer',
+      headerName: 'Answer',
     },
     {
-      field: 'gend',
-      headerName: 'Gender',
-    },
-    // {
-    //   field: "action",
-    //   headerName: "Actions",
-    //   width: 200,
-    //   renderCell: (params) => {
-    //     return (
-    //       <div className={styles.cellAction}>
-    //         <div className={styles.editButton}>Edit</div>
-    //         <div
-    //           className={styles.deleteButton}
-    //           onClick={() => handleDelete(params.row.id)}
-    //         >
-    //           Delete
-    //         </div>
-    //       </div>
-    //     );
-    //   },
-    // }
+      field: "action",
+      headerName: "Actions",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <div className={styles.cellAction}>
+            <div className={styles.editButton}>
+              <Link to={`/FAQ/edit/${params.row.id}`}>
+                Edit
+              </Link>
+              </div>
+            <div
+              className={styles.deleteButton}
+              onClick={() => handleDelete(params.row.id)}
+            >
+              Delete
+            </div>
+          </div>
+        );
+      },
+    }
   ];
 
-  const { isFetching, data } = useListGiftboxesQuery({});
-  const [deleteGiftbox] = useDeleteGiftboxMutation();
+  const { isFetching, data } = useListFAQQuery({});
+  const [deleteFAQ] = useDeleteFAQMutation();
  
   useEffect(() => {
-    if(data?.giftboxes) {
-      setGiftboxes(data?.giftboxes)
+    if(data?.faqs) {
+      setFAQs(data?.faqs)
     }
-  }, [data?.giftboxes]);
+  }, [data?.faqs]);
 
 
   const handleDelete = useCallback((id: string) => {
-    deleteGiftbox({ id }).then(() => setGiftboxes(prev => prev.filter(item => item.id !== id)));
-  }, [deleteGiftbox])
+    deleteFAQ({ id }).then(() => setFAQs(prev => prev.filter(item => item.id !== id)));
+  }, [deleteFAQ])
 
   return (
     <PageControl>
       <>
-        {isFetching ? <Loading /> : <DataTable  columns={columns} routeTo="/giftboxes/new" rows={[]} />}
+        {isFetching ? <Loading /> : <DataTable  columns={columns} routeTo="/FAQ/new" rows={FAQs} />}
       </>
     </PageControl>
   );

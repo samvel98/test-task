@@ -8,7 +8,8 @@ import {
   GroupsTwoTone,
   LiveHelpTwoTone,
   SubscriptionsTwoTone,
-  SettingsApplicationsTwoTone
+  SettingsApplicationsTwoTone,
+  BookTwoTone
 } from "@mui/icons-material";
 
 import { Link } from "react-router-dom";
@@ -35,6 +36,12 @@ export const Sidebar = () => {
             <li>
               <CardGiftcardTwoTone className={styles.icon} />
               <span>Giftboxes</span>
+            </li>
+          </Link>
+          <Link to="/giftbooks" style={{ textDecoration: "none" }}>
+            <li>
+              <BookTwoTone className={styles.icon} />
+              <span>Giftbooks</span>
             </li>
           </Link>
           <Link to="/users" style={{ textDecoration: "none" }}>

@@ -10,7 +10,12 @@ import {
   TeamMembers,
   Subscrib,
   Settings,
-  FAQ
+  FAQ,
+  NewFAQ,
+  EditFAQ,
+  Giftbook,
+  NewTeamMember,
+  EditTeamMember,
 } from './components';
 import { Orders } from './components/orders';
 // import { currentUserToken } from './features/current-user/current-user.slice'
@@ -33,10 +38,21 @@ function NavigationRoutes() {
             <Route index element={<Giftboxes />} />
             <Route element={<NewGiftbox />} path="new" />
           </Route>
+          <Route path='giftbooks' >
+            <Route index element={<Giftbook />} />
+          </Route>
           <Route element={<Orders />} path='orders' />
-          <Route element={<TeamMembers />} path='team-members' />
+          <Route path='team-members' >
+            <Route index element={<TeamMembers />} />
+            <Route path="new" element={<NewTeamMember />} />
+            <Route path="edit/:id" element={<EditTeamMember />} />
+          </Route>
           <Route element={<Settings />} path='settings' />
-          <Route element={<FAQ />} path='FAQ' />
+          <Route path='FAQ' > 
+            <Route index element={<FAQ />} />
+            <Route element={<NewFAQ />} path='new' />
+            <Route element={<EditFAQ />} path='edit/:id' />
+          </Route>
           <Route element={<Subscrib />} path='subscriptions' />
           <Route
             element={<Navigate to="/" />}
