@@ -4,6 +4,7 @@ import {  DataTable, PageControl } from "../";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDeleteGiftboxMutation, useListGiftboxesQuery } from "../../features/api/api.slice";
 import { Loading } from "../loading";
+import { Link } from "react-router-dom";
 
 export const Giftboxes = () => {
   const styles = useStyles();
@@ -17,7 +18,7 @@ export const Giftboxes = () => {
       
       renderCell: (params) => {
         return (
-          <div className={styles.cellImage}><img src={`${process.env.REACT_APP_API_URL}/${params.row.img}`} /></div>
+          <div className={styles.cellImage}><img src={params.row.img} /></div>
         )
       }
     },
@@ -44,7 +45,11 @@ export const Giftboxes = () => {
       renderCell: (params) => {
         return (
           <div className={styles.cellAction}>
-            <div className={styles.editButton}>Edit</div>
+            <div className={styles.editButton}>
+              <Link to={`/giftboxes/edit/${params.row.id}`}>
+                Edit
+              </Link>
+            </div>
             <div
               className={styles.deleteButton}
               onClick={() => handleDelete(params.row.id)}

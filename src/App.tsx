@@ -18,6 +18,7 @@ import {
   EditTeamMember,
 } from './components';
 import { Orders } from './components/orders';
+import { EditGiftbox } from './components/giftboxes/edit';
 // import { currentUserToken } from './features/current-user/current-user.slice'
 
 function App() {
@@ -37,6 +38,7 @@ function NavigationRoutes() {
           <Route path='giftboxes' >
             <Route index element={<Giftboxes />} />
             <Route element={<NewGiftbox />} path="new" />
+            <Route element={<EditGiftbox />} path="edit/:id" />
           </Route>
           <Route path='giftbooks' >
             <Route index element={<Giftbook />} />

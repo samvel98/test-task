@@ -5,6 +5,8 @@ import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import * as filestack from 'filestack-js';
+filestack.init('Aqr6RauGzRZLBf0R1qeQOz');
 
 ReactDOM.render(
   <React.StrictMode>

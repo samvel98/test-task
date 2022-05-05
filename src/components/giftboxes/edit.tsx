@@ -9,10 +9,10 @@ import {
 } from '@mui/material';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useStyles } from "./giftboxes.styles";
-import { useLazyCreateGiftboxQuery } from "../../features/api/api.slice";
+import { useGetGiftboxQuery, useLazyCreateGiftboxQuery, useLazyEditGiftboxQuery } from "../../features/api/api.slice";
 import * as filestack from 'filestack-js';
-import { useNavigate } from "react-router-dom";
-const client = filestack.init('Aqr6RauGzRZLBf0R1qeQOz');
+import { useNavigate, useParams } from "react-router-dom";
+import { Loading } from "../loading";
 
 type Inputs = {
   title?: string;
@@ -24,41 +24,25 @@ type Inputs = {
   items?: string[];
 }
 
-export const NewGiftbox = () => {
+export const EditGiftbox = () => {
   const styles = useStyles()
 
   const { register, handleSubmit, formState: { errors,  }, getValues,  } = useForm<Inputs>();
-  const [createGiftbox] = useLazyCreateGiftboxQuery();
-  const [mainImage, setMainImage] = useState('');
-  const [itemsList, setItemsList] = useState<string[]>([]);
-  const navigate = useNavigate();
-  const mainImageOptions: filestack.PickerOptions = {
-    accept: 'image/*',
-    onUploadDone: (res) => setMainImage(res.filesUploaded[0].url)
-
-  };
+  const params = useParams();
   
-  const itemsOptions: filestack.PickerOptions = {
-    accept: 'image/*',
-    maxFiles: 20,
-    onUploadDone: (res) => setItemsList(prev => [...prev, ...res.filesUploaded.map((i) => i.url)])
-  };
+  const { data, isFetching } = useGetGiftboxQuery({id: params.id})
+
+  console.log({data})
+  const [edit] = useLazyEditGiftboxQuery();
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<Inputs> = useCallback(async (values) => {
-    createGiftbox({ data: { ...values, image: mainImage, items: itemsList } }).then(() => navigate('/giftboxes'))
-  }, [createGiftbox, itemsList, mainImage, navigate])
+    edit({ data: values, id: params.id }).then(() => navigate('/giftboxes'))
+  }, [edit, navigate, params.id])
 
-  const Anasun = useCallback(() => {
-    return (
-      <>
-        {itemsList.map((it, index) => (
-          <div key={index} className={styles.mainImage}>
-            <img src={it} alt="" />
-          </div>
-        ))}
-      </>
-    )
-  }, [itemsList, styles.mainImage]);
+  if (isFetching) {
+    return <Loading />
+  }
 
   return (
     <PageControl>
@@ -70,6 +54,7 @@ export const NewGiftbox = () => {
           <TextField
             fullWidth
             className={styles.m_b}
+            defaultValue={data.giftbox.title}
             error={!!errors.title}
             helperText={errors.title ? "field is requierd" : ""}
             label="Title"
@@ -81,6 +66,7 @@ export const NewGiftbox = () => {
           <TextField
             fullWidth
             className={styles.m_b}
+            defaultValue={data.giftbox.description}
             error={!!errors.description}
             helperText={errors.description ? "field is requierd" : ""}
             label="Description"
@@ -93,6 +79,7 @@ export const NewGiftbox = () => {
           <TextField
             fullWidth
             className={styles.m_b}
+            defaultValue={data.giftbox.size}
             error={!!errors.size}
             helperText={errors.size ? "field is requierd" : ""}
             label="Size"
@@ -104,6 +91,7 @@ export const NewGiftbox = () => {
           <TextField
             fullWidth
             className={styles.m_b}
+            defaultValue={data.giftbox.price}
             error={!!errors.price}
             helperText={errors.price ? "field is requierd" : ""}
             label="Price"
@@ -113,44 +101,23 @@ export const NewGiftbox = () => {
           />
         </div>
         <div>
-        <InputLabel id="label">Gender</InputLabel>
-        <Select
-          autoWidth
-          fullWidth
-          className={styles.m_b}
-          defaultValue="female"
-          label="Gender"
-          labelId="label"
-          value={getValues('gender')}
-          {...register("gender")}
-        >
-          <MenuItem value="female">female</MenuItem>
-          <MenuItem value="male">male</MenuItem>
-          <MenuItem value="other">other</MenuItem>
-        </Select>
+          <InputLabel id="label">Gender</InputLabel>
+          <Select
+            autoWidth
+            fullWidth
+            className={styles.m_b}
+            defaultValue={data.giftbox.gend}
+            label="Gender"
+            labelId="label"
+            value={getValues('gender')}
+            {...register("gender")}
+          >
+            <MenuItem value="female">female</MenuItem>
+            <MenuItem value="male">male</MenuItem>
+            <MenuItem value="other">other</MenuItem>
+          </Select>
+        </div>
         
-        </div>
-        {mainImage ? (
-          <div className={styles.mainImage}>
-            <img src={mainImage} alt="" />
-          </div>
-        ) : (
-          <Button className={styles.m_b} variant="contained"  onClick={() => client.picker(mainImageOptions).open()}>
-            upload an image
-          </Button>
-        )}
-
-
-          <Anasun />
-        {/* <div className={styles.itemsImages}>
-        </div> */}
-        <div>
-          <Button className={styles.m_b} variant="contained"  onClick={() => client.picker(itemsOptions).open()}>
-            upload an items
-          </Button>
-        </div>
-
-
         <Button type="submit" variant="contained" >
           Save
         </Button>

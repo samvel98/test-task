@@ -20,6 +20,16 @@ export const apiSlice = createApi({
     listGiftboxes: builder.query({
       query: () => `/api/giftbox`,
     }),
+    getGiftbox: builder.query({
+      query: ({ id }) => `/api/giftbox/${id}`,
+    }),
+    editGiftbox: builder.query({
+      query: ({ data, id }) => ({
+        url: `/api/giftbox/update/${id}`,
+        method: 'POST',
+        body: data
+      })
+    }),
     createGiftbox: builder.query({
       query: ({ data }) => ({
         url: '/api/giftbox/create',
@@ -147,6 +157,8 @@ export const {
   useGetFAQQuery,
   useLazyEditFAQQuery,
   useListFAQQuery,
+  useGetGiftboxQuery,
+  useLazyEditGiftboxQuery,
   useDeleteFAQMutation,
   useUpdateOrCreateSettingsMutation,
   useGetSettingsQuery,

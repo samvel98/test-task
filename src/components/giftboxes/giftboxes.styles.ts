@@ -43,4 +43,15 @@ export const useStyles = createUseStyles(() => ({
     border: '1px dotted rgba(220, 20, 60, 0.6)',
     cursor: 'pointer'
   },
+  mainImage: {
+    width: 200,
+    '& img': {
+      width: '100%'
+    }
+  },
+  itemsImages: {
+    width: 500
+    // display: 'flex',
+    // flexWrap: 'wrap'
+  }
 }))
