@@ -16,11 +16,36 @@ import { Page10 } from "./pages/page10";
 import { Page11 } from "./pages/page11";
 import { Page12 } from "./pages/page12";
 
+const asd = {
+  page: {
+    // width: 500,
+    '& svg': {
+      width: '100%',
+      height: 'auto'
+    }
+  },
+  texted: {
+    // padding: '250px 0'
+  },
+  textedContainer: {
+    position: 'relative',
+  },
+  headerText: {
+    color: '#66126B'
+  },
+  text: {
+    position: 'absolute',
+    textAlign: 'center',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    padding: '0 30px'
+  }
+}
 export const Friends = forwardRef((props, ref: React.ForwardedRef<any>) => {
   const styles = useStyles()
   return (
     <div ref={ref}>
-      <div className={styles.page}>
+      <div className={styles.page} style={{}}>
         <HomePage />
       </div>
       <div className={cn(styles.page, styles.texted)}>

@@ -19,6 +19,7 @@ import {
 } from './components';
 import { Orders } from './components/orders';
 import { EditGiftbox } from './components/giftboxes/edit';
+import { TestView } from './components/NewEditEmoji';
 // import { currentUserToken } from './features/current-user/current-user.slice'
 
 function App() {

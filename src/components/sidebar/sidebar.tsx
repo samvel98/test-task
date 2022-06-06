@@ -9,6 +9,7 @@ import {
   LiveHelpTwoTone,
   SubscriptionsTwoTone,
   SettingsApplicationsTwoTone,
+  TempleBuddhist,
   BookTwoTone
 } from "@mui/icons-material";
 
@@ -78,6 +79,12 @@ export const Sidebar = () => {
             <li>
               <SettingsApplicationsTwoTone className={styles.icon} />
               <span>Settings</span>
+            </li>
+          </Link>
+          <Link to="/test-view" style={{ textDecoration: "none" }}>
+            <li>
+              <TempleBuddhist className={styles.icon} />
+              <span>Test</span>
             </li>
           </Link>
         </ul>

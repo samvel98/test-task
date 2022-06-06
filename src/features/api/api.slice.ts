@@ -92,6 +92,9 @@ export const apiSlice = createApi({
     getFAQ: builder.query({
       query: ({ id }) => `/admin/faq/${id}`,
     }),
+    getUserEmoji: builder.query({
+      query: ({ id }) => `/api/emoji/admin/${id}`,
+    }),
     createFAQ: builder.query({
       query: ({ data }) => ({
         url: `/admin/faq/create`,
@@ -155,6 +158,8 @@ export const {
   useUsersListQuery,
   useLazyCreateFAQQuery,
   useGetFAQQuery,
+  useLazyGetUserEmojiQuery,
+  useGetUserEmojiQuery,
   useLazyEditFAQQuery,
   useListFAQQuery,
   useGetGiftboxQuery,
