@@ -93,12 +93,12 @@ export const Friends = forwardRef((props, ref: React.ForwardedRef<any>) => {
       <div className={cn(styles.page, styles.texted)}>
         <TextedPage text="That’s why I’m being grateful… I have such friend. Even if we fight or argue, I just know for sure, that you’re still with me" />
       </div>
-      <div className={styles.page}>
+      {/* <div className={styles.page}>
         <Page8 />
       </div>
       <div className={cn(styles.page, styles.texted)}>
         <TextedPage text="You cheer me up when I’m not in the mood. Sometimes you’re the only one who can do it" />
-      </div>
+      </div> */}
       <div className={styles.page}>
         <Page9 />
       </div>

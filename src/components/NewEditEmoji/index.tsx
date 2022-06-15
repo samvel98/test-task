@@ -81,52 +81,56 @@ const getNavbarItems = () => {
         male: manLips
       }
     },
-    {
-      id: 'beard',
-      title: 'Beards',
-      icons: {
-        male: manBeards
-      }
-    },
+    // {
+    //   id: 'beard',
+    //   title: 'Beards',
+    //   icons: {
+    //     male: manBeards
+    //   }
+    // },
   ]
 }
 
-export const TestView = ({ top, left }) => {
+export const TestView = ({ styles, type = 'The giver' }: { styles?: React.CSSProperties | undefined; type?: 'The giver' | 'The receiver' }) => {
   const navbarItems = useMemo(() => getNavbarItems(), []);
 
   const gender = useMemo(() => 'female', []);
-  const { data: userEmoji } = useGetUserEmojiQuery({ id: 1 }) || []
+  const { data: emojies } = useGetUserEmojiQuery({ user_id: 7 }) || []
+
+  const userEmoji = useMemo(() => {
+    return emojies?.find((emoji: any) => emoji.type === type) || {}
+  }, [emojies, type])
 
   console.log({userEmoji})
   const selectedHeadForm = useMemo(() => 
-    navbarItems.find(i => i.id === 'headForm').icons[gender].find(i => i.id === userEmoji?.headFormId),
-  [gender, navbarItems, userEmoji?.headFormId]);
+    navbarItems.find(i => i.id === 'headForm')?.icons.female.find(i => i.id === userEmoji?.headFormId),
+  [navbarItems, userEmoji?.headFormId]);
   const selectedBody = useMemo(() => 
-    navbarItems.find(i => i.id === 'body').icons[gender].find(i => i.id === userEmoji?.bodyId),
-  [gender, navbarItems, userEmoji?.bodyId]);
+    navbarItems.find(i => i.id === 'body')?.icons.female.find(i => i.id === userEmoji?.bodyId),
+  [navbarItems, userEmoji?.bodyId]);
   const selectedEyes = useMemo(() => 
-    navbarItems.find(i => i.id === 'eyes').icons[gender].find(i => i.id === userEmoji?.eyesId),
-  [gender, navbarItems, userEmoji?.eyesId]);
+    navbarItems.find(i => i.id === 'eyes')?.icons.female.find(i => i.id === userEmoji?.eyesId),
+  [navbarItems, userEmoji?.eyesId]);
   const selectedLips = useMemo(() => 
-    navbarItems.find(i => i.id === 'lips').icons[gender].find(i => i.id === userEmoji?.lipsId),
-  [gender, navbarItems, userEmoji?.lipsId]);
+    navbarItems.find(i => i.id === 'lips')?.icons.female.find(i => i.id === userEmoji?.lipsId),
+  [navbarItems, userEmoji?.lipsId]);
   const selectedHair = useMemo(() => 
-    navbarItems.find(i => i.id === 'hair').icons[gender].find(i => i.id === userEmoji?.hairId),
-  [gender, navbarItems, userEmoji?.hairId]);
+    navbarItems.find(i => i.id === 'hair')?.icons.female.find(i => i.id === userEmoji?.hairId),
+  [navbarItems, userEmoji?.hairId]);
   const selectedBrows = useMemo(() => 
-    navbarItems.find(i => i.id === 'brows').icons[gender].find(i => i.id === userEmoji?.browsId),
-  [gender, navbarItems, userEmoji?.browsId]);
+    navbarItems.find(i => i.id === 'brows')?.icons.female.find(i => i.id === userEmoji?.browsId),
+  [navbarItems, userEmoji?.browsId]);
   const selectedNose = useMemo(() => 
-    navbarItems.find(i => i.id === 'nose').icons[gender].find(i => i.id === userEmoji?.noseId),
-  [gender, navbarItems, userEmoji?.noseId]);
-  const selectedBeard = useMemo(() => 
-    navbarItems.find(i => i.id === 'beard').icons['male'].find(i => i.id === userEmoji?.beardId),
-  [navbarItems, userEmoji?.beardId]);
+    navbarItems.find(i => i.id === 'nose')?.icons.female.find(i => i.id === userEmoji?.noseId),
+  [navbarItems, userEmoji?.noseId]);
+  // const selectedBeard = useMemo(() => 
+  //   navbarItems.find(i => i.id === 'beard').icons['male'].find(i => i.id === userEmoji?.beardId),
+  // [navbarItems, userEmoji?.beardId]);
 
   return (
-    <div style={{ position: 'absolute', left, top, transform: 'scale(0.65)' }}>
+    <div style={{ ...styles }}>
       <EmojiDemo
-        beard={selectedBeard}
+        // beard={selectedBeard}
         body={selectedBody}
         brows={selectedBrows}
         eyes={selectedEyes}

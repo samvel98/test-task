@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useStyles } from "./orders.styles";
 import { DataTable, PageControl } from "../";
 import { GridColDef } from "@mui/x-data-grid";
 import { useOrdersListQuery } from "../../features/api/api.slice";
 import { Loading } from "../loading";
 
-// <th scope="col">ID</th>
-// <th scope="col">Email</th>
-// <th scope="col">Total Price</th>
-// <th scope="col">Status</th>
-// <th scope="col">Address</th>
-// <th scope="col">Date</th>
-// <th scope="col">Actions</th>
+
 export const Orders = () => {
-  const styles = useStyles();
   const [orders, setOrders] = useState([]);
 
   const columns: GridColDef[] = [

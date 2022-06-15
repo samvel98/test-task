@@ -13,9 +13,8 @@ export const Giftbook = () => {
           content={() => componentRef.current}
           trigger={() => <button>Print this out!</button>}
         />
-        <div style={{ width: '300px' }}>
-          <Friends ref={componentRef} />
-        </div>
+        
+        <Friends ref={componentRef} />
       </>
     </PageControl>
   )

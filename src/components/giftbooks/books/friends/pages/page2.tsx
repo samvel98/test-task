@@ -4,8 +4,9 @@ import { Page2Icon } from "../icons";
 
 export const Page2 = () => {
   return (
-    <div style={{ position: 'relative' }}>
-      <TestView left="17.5%" top="19%" />
+    <div style={{ position: 'relative', width: 794, height:    1118, display: 'flex' }}>
+      <TestView styles={{ top: 354, left: 203, transform: 'scale(1.6)', position: 'absolute' }} />
+      <TestView styles={{ top: 354, left: 490, transform: 'scale(1.6)', position: 'absolute' }} type="The receiver" />
       <Page2Icon />
     </div>
   )

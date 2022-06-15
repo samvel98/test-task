@@ -93,7 +93,7 @@ export const apiSlice = createApi({
       query: ({ id }) => `/admin/faq/${id}`,
     }),
     getUserEmoji: builder.query({
-      query: ({ id }) => `/api/emoji/admin/${id}`,
+      query: ({ user_id }) => `/api/emoji/admin/${user_id}`,
     }),
     createFAQ: builder.query({
       query: ({ data }) => ({
