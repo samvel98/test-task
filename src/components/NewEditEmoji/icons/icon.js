@@ -17,6 +17,7 @@ import * as manBrows from './components/man-brows';
 import * as womanLips from './components/woman-lips';
 import * as manLips from './components/man-lips';
 import * as beards from './components/man-beards';
+import * as womanEars from './components/woman-ears';
 
 export function Icon() {
   return null;
@@ -100,4 +101,8 @@ for (let i = 1; i <= 20; i++) {
 // ------------- beards --------------- //
 for (let i = 1; i <= 10; i++) {
   Icon[`Beard${i}`] = beards[`Beard${i}`]
+}
+
+for (let i = 1; i <= 23; i++) {
+  Icon[`WomanEars${i}`] = womanEars[`WomanEars${i}`]
 }

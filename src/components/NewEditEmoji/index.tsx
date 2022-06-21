@@ -10,6 +10,7 @@ import {
   manHairs,
   manBrows,
   manBeards,
+  womanEars,
   manHeadForms,
   womanHeadForms,
   womanBodyForms,
@@ -81,6 +82,14 @@ const getNavbarItems = () => {
         male: manLips
       }
     },
+    {
+      id: 'ears',
+      title: 'Ears',
+      icons: {
+        female: womanEars,
+        male: manLips
+      }
+    },
     // {
     //   id: 'beard',
     //   title: 'Beards',
@@ -95,13 +104,12 @@ export const TestView = ({ styles, type = 'The giver' }: { styles?: React.CSSPro
   const navbarItems = useMemo(() => getNavbarItems(), []);
 
   const gender = useMemo(() => 'female', []);
-  const { data: emojies } = useGetUserEmojiQuery({ user_id: 7 }) || []
+  const { data: emojies } = useGetUserEmojiQuery({ user_id: localStorage.getItem('userId') }) || []
 
   const userEmoji = useMemo(() => {
     return emojies?.find((emoji: any) => emoji.type === type) || {}
   }, [emojies, type])
 
-  console.log({userEmoji})
   const selectedHeadForm = useMemo(() => 
     navbarItems.find(i => i.id === 'headForm')?.icons.female.find(i => i.id === userEmoji?.headFormId),
   [navbarItems, userEmoji?.headFormId]);
@@ -123,6 +131,9 @@ export const TestView = ({ styles, type = 'The giver' }: { styles?: React.CSSPro
   const selectedNose = useMemo(() => 
     navbarItems.find(i => i.id === 'nose')?.icons.female.find(i => i.id === userEmoji?.noseId),
   [navbarItems, userEmoji?.noseId]);
+  const selectedEars = useMemo(() => 
+    navbarItems.find(i => i.id === 'ears')?.icons.female.find(i => i.id === userEmoji?.earsId),
+  [navbarItems, userEmoji?.earsId]);
   // const selectedBeard = useMemo(() => 
   //   navbarItems.find(i => i.id === 'beard').icons['male'].find(i => i.id === userEmoji?.beardId),
   // [navbarItems, userEmoji?.beardId]);
@@ -133,6 +144,7 @@ export const TestView = ({ styles, type = 'The giver' }: { styles?: React.CSSPro
         // beard={selectedBeard}
         body={selectedBody}
         brows={selectedBrows}
+        ears={selectedEars}
         eyes={selectedEyes}
         gender={gender}
         hair={selectedHair}

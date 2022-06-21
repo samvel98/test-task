@@ -2,9 +2,8 @@ import React from "react";
 import { useStyles } from "../styles";
 import cn from 'classnames';
 
-export function EmojiDemo({ headForm, hair, brows, eyes, nose, lips, body, gender }) {
+export function EmojiDemo({ headForm, hair, brows, eyes, nose, lips, body, gender, ears }) {
   const classes = useStyles();
-  console.log({nose})
   return (
     <div className={cn(classes.emojiHead, gender)}>
       <div className={classes.emojiHeadIcon}>
@@ -12,6 +11,9 @@ export function EmojiDemo({ headForm, hair, brows, eyes, nose, lips, body, gende
       </div>
       <div className={cn(classes.emojiHair, hair?.id, gender)}>
         {hair?.icon}
+      </div>
+      <div className={cn(classes.ears, ears?.id, hair?.id)}>
+        {ears?.icon}
       </div>
       <div className={classes.brows}>
         {brows?.icon}

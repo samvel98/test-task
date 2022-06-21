@@ -240,6 +240,21 @@ export const useStyles = createUseStyles({
       }
     },
   },
+  ears: {
+    position: 'absolute',
+    width: 87,
+    top: 80,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '& svg': {
+      width: '100%',
+      height: 'auto'
+    },
+    '&.womanHair3, &.womanHair12, &.womanHair18, &.womanHair17, &.womanHair28, &.womanHair29, &.womanHair30, &.womanHair38, &.womanHair43, &.womanHair45, &.womanHair46, &.womanHair48': {
+      zIndex: 2
+    }
+  },
   brows: {
     position: 'absolute',
     width: 182,
