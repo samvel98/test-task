@@ -8,7 +8,9 @@ import {
   GroupsTwoTone,
   LiveHelpTwoTone,
   SubscriptionsTwoTone,
-  SettingsApplicationsTwoTone
+  SettingsApplicationsTwoTone,
+  TempleBuddhist,
+  BookTwoTone
 } from "@mui/icons-material";
 
 import { Link } from "react-router-dom";
@@ -37,6 +39,12 @@ export const Sidebar = () => {
               <span>Giftboxes</span>
             </li>
           </Link>
+          <Link to="/giftbooks" style={{ textDecoration: "none" }}>
+            <li>
+              <BookTwoTone className={styles.icon} />
+              <span>Giftbooks</span>
+            </li>
+          </Link>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
               <PersonTwoTone className={styles.icon} />
@@ -49,22 +57,36 @@ export const Sidebar = () => {
               <span>Orders</span>
             </li>
           </Link>
-          <li>
-            <GroupsTwoTone className={styles.icon} />
-            <span>Team Members</span>
-          </li>
-          <li>
-            <LiveHelpTwoTone className={styles.icon} />
-            <span>FAQ</span>
-          </li>
-          <li>
-            <SubscriptionsTwoTone className={styles.icon} />
-            <span>Subscriptions</span>
-          </li>
-          <li>
-            <SettingsApplicationsTwoTone className={styles.icon} />
-            <span>Settings</span>
-          </li>
+          <Link to="/team-members" style={{ textDecoration: "none" }}>
+            <li>
+              <GroupsTwoTone className={styles.icon} />
+              <span>Team Members</span>
+            </li>
+          </Link>
+          <Link to="/FAQ" style={{ textDecoration: "none" }}>
+            <li>
+              <LiveHelpTwoTone className={styles.icon} />
+              <span>FAQ</span>
+            </li>
+          </Link>
+          <Link to="/subscriptions" style={{ textDecoration: "none" }}>
+            <li>
+              <SubscriptionsTwoTone className={styles.icon} />
+              <span>Subscriptions</span>
+            </li>
+          </Link>
+          <Link to="/settings" style={{ textDecoration: "none" }}>
+            <li>
+              <SettingsApplicationsTwoTone className={styles.icon} />
+              <span>Settings</span>
+            </li>
+          </Link>
+          <Link to="/test-view" style={{ textDecoration: "none" }}>
+            <li>
+              <TempleBuddhist className={styles.icon} />
+              <span>Test</span>
+            </li>
+          </Link>
         </ul>
       </div>
     </div>

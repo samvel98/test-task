@@ -20,6 +20,23 @@ export const apiSlice = createApi({
     listGiftboxes: builder.query({
       query: () => `/api/giftbox`,
     }),
+    getGiftbox: builder.query({
+      query: ({ id }) => `/api/giftbox/${id}`,
+    }),
+    editGiftbox: builder.query({
+      query: ({ data, id }) => ({
+        url: `/api/giftbox/update/${id}`,
+        method: 'POST',
+        body: data
+      })
+    }),
+    createGiftbox: builder.query({
+      query: ({ data }) => ({
+        url: '/api/giftbox/create',
+        method: 'POST',
+        body: data
+      }) 
+    }),
     usersList: builder.query({
       query: () => `/api/users`,
     }),
@@ -33,12 +50,29 @@ export const apiSlice = createApi({
         body: data
       }) 
     }),
+    getSettings: builder.query({
+      query: () => '/admin/settings',
+    }),
+    updateOrCreateSettings: builder.mutation({
+      query: ({ data }) => ({
+        url: '/admin/settings/update',
+        method: 'POST',
+        body: data
+      }) 
+    }),
     updateUser: builder.mutation({
       query: ({ id, data }) => ({
         url: `/api/users/${id}`,
         method: 'PATCH',
-        body: data
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        body: data,
+        
       }) 
+    }),
+    ordersList: builder.query({
+      query: () => `/admin/orders`,
     }),
     deleteUser: builder.mutation({
       query: ({ id }) => ({
@@ -51,7 +85,63 @@ export const apiSlice = createApi({
         url: `/api/giftbox/delete/${id}`,
         method: 'DELETE'
       })
-    })
+    }),
+    listFAQ: builder.query({
+      query: () => `/admin/faq`,
+    }),
+    getFAQ: builder.query({
+      query: ({ id }) => `/admin/faq/${id}`,
+    }),
+    getUserEmoji: builder.query({
+      query: ({ user_id }) => `/api/emoji/admin/${user_id}`,
+    }),
+    createFAQ: builder.query({
+      query: ({ data }) => ({
+        url: `/admin/faq/create`,
+        method: 'POST',
+        body: data
+      })
+    }),
+    editFAQ: builder.query({
+      query: ({ data, id }) => ({
+        url: `/admin/faq/update/${id}`,
+        method: 'POST',
+        body: data
+      })
+    }),
+    deleteFAQ: builder.mutation({
+      query: ({ id }) => ({
+        url: `/admin/faq/delete/${id}`,
+        method: 'DELETE'
+      })
+    }),
+    listTeamMember: builder.query({
+      query: () => `/admin/teammembers`,
+    }),
+    getTeamMember: builder.query({
+      query: ({ id }) => `/admin/teammembers/${id}`,
+    }),
+    deleteTeamMember: builder.mutation({
+      query: ({ id }) => ({
+        url: `/admin/teammembers/delete/${id}`,
+        method: 'DELETE'
+      })
+    }),
+    createTeamMember: builder.query({
+      query: ({ data }) => ({
+        url: `/admin/teammembers/create`,
+        method: 'POST',
+        body: data
+      })
+    }),
+    editTeamMember: builder.query({
+      query: ({ data, id }) => ({
+        url: `/admin/teammembers/update/${id}`,
+        method: 'POST',
+        body: data
+      })
+    }),
+    
   }),
 });
 
@@ -62,7 +152,26 @@ export const {
   useCreateUserMutation,
   useDeleteUserMutation,
   useDeleteGiftboxMutation,
+  useOrdersListQuery,
+  useCreateGiftboxQuery,
+  useLazyCreateGiftboxQuery,
   useUsersListQuery,
+  useLazyCreateFAQQuery,
+  useGetFAQQuery,
+  useLazyGetUserEmojiQuery,
+  useGetUserEmojiQuery,
+  useLazyEditFAQQuery,
+  useListFAQQuery,
+  useGetGiftboxQuery,
+  useLazyEditGiftboxQuery,
+  useDeleteFAQMutation,
+  useUpdateOrCreateSettingsMutation,
+  useGetSettingsQuery,
+  useLazyCreateTeamMemberQuery,
+  useLazyEditTeamMemberQuery,
+  useDeleteTeamMemberMutation,
+  useListTeamMemberQuery,
+  useGetTeamMemberQuery,
   useGetUserQuery,
   useLoginMutation
 } = apiSlice;

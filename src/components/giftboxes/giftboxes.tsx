@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useStyles } from "./giftboxes.styles";
-import { Sidebar, DataTable } from "../";
+import {  DataTable, PageControl } from "../";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDeleteGiftboxMutation, useListGiftboxesQuery } from "../../features/api/api.slice";
 import { Loading } from "../loading";
-import { Modal } from "../modal";
+import { Link } from "react-router-dom";
 
 export const Giftboxes = () => {
   const styles = useStyles();
-  const [openCreateModal, setOpenCreateModal] = useState(false);
   const [giftboxes, setGiftboxes] = useState<IGiftbox[]>([]);
 
   const columns: GridColDef[] = [
@@ -19,7 +18,7 @@ export const Giftboxes = () => {
       
       renderCell: (params) => {
         return (
-          <div className={styles.cellImage}><img src={`${process.env.REACT_APP_API_URL}/${params.row.img}`} /></div>
+          <div className={styles.cellImage}><img src={params.row.img} /></div>
         )
       }
     },
@@ -46,7 +45,11 @@ export const Giftboxes = () => {
       renderCell: (params) => {
         return (
           <div className={styles.cellAction}>
-            <div className={styles.editButton}>Edit</div>
+            <div className={styles.editButton}>
+              <Link to={`/giftboxes/edit/${params.row.id}`}>
+                Edit
+              </Link>
+            </div>
             <div
               className={styles.deleteButton}
               onClick={() => handleDelete(params.row.id)}
@@ -68,25 +71,16 @@ export const Giftboxes = () => {
     }
   }, [data?.giftboxes]);
 
-  const onAddGiftbox = useCallback(() => {
-    setOpenCreateModal(true)
-  }, [data]);
 
   const handleDelete = useCallback((id: string) => {
     deleteGiftbox({ id }).then(() => setGiftboxes(prev => prev.filter(item => item.id !== id)));
-  }, [])
-
-  const onSubmit = useCallback((values) => {
-    console.log(values)
-  }, [])
+  }, [deleteGiftbox])
 
   return (
-    <div className={styles.giftboxes}>
-      <Sidebar />
-      <div className={styles.giftboxesContainer}>
-        {isFetching ? <Loading /> : <DataTable canAdd onAddNew={onAddGiftbox} rows={giftboxes} columns={columns} />}
-        {openCreateModal && <Modal.Create onSubmit={onSubmit} onCancel={() => setOpenCreateModal(false)} />}
-      </div>
-    </div>
+    <PageControl>
+      <>
+        {isFetching ? <Loading /> : <DataTable  columns={columns} routeTo="/giftboxes/new" rows={giftboxes} />}
+      </>
+    </PageControl>
   );
 }

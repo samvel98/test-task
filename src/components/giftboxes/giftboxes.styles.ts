@@ -7,6 +7,17 @@ export const useStyles = createUseStyles(() => ({
   giftboxesContainer: {
     flex: 6
   },
+  container: {
+    padding: 40,
+    display: 'flex',
+    justifyContent: 'center',
+    '& form': {
+      width: '100%',
+    }
+  },
+  m_b: {
+    marginBottom: '20px !important'
+  },
   cellImage: {
     width: '100%',
     display: 'flex',
@@ -32,4 +43,15 @@ export const useStyles = createUseStyles(() => ({
     border: '1px dotted rgba(220, 20, 60, 0.6)',
     cursor: 'pointer'
   },
+  mainImage: {
+    width: 200,
+    '& img': {
+      width: '100%'
+    }
+  },
+  itemsImages: {
+    width: 500
+    // display: 'flex',
+    // flexWrap: 'wrap'
+  }
 }))
