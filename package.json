@@ -41,7 +41,7 @@
   "scripts": {
     "start": "parcel --no-cache",
     "watch:js": "parcel ./src/index.tsx --no-cache",
-    "build": "react-scripts build",
+    "build": "parcel build ./src/index.tsx --no-cache --no-content-hash --no-scope-hoist",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
